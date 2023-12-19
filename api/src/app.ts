@@ -9,7 +9,7 @@ const server = express();
 server.use(express.json());
 
 server.get("/", (req: Request, res: Response) => {
-  return res.send("Hola mundo")
+  return res.send("Hola mundo2")
 });
 
 
