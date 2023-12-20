@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { User } from "./Models/user.model";
+import { Post } from "./Models/post.model"
+import { Comment } from "./Models/comment.model";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -16,7 +18,7 @@ const database = new Sequelize({
   host: DB_HOST,
   port: Number(DB_PORT),
   dialect: "mysql",
-  models: [User], // Ruta a tus modelos
+  models: [User, Post, Comment ], // Ruta a tus modelos
 });
 
 export default database;
