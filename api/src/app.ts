@@ -1,21 +1,20 @@
-import { Request, Response } from "express";
-
-// rutas
-import userRoutes from "./Routes/user.route";
-
 //! imports library
+import { Request, Response } from "express";
 const express = require("express");
+
+//! Modulos
+import userRoutes from "./Routes/user.route";
 
 const server = express();
 
 //! Midleware
 server.use(express.json());
 
+//! Routes
 server.get("/", (req: Request, res: Response) => {
-  return res.send("Hola mundo2")
+  return res.send("Hola mundo2");
 });
 
-// rutas
-server.use("/user", userRoutes);
+server.use("/users", userRoutes);
 
 export default server;

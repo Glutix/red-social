@@ -1,9 +1,16 @@
-import { Model, Table, Column, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { Post } from './post.model';
-import { User } from './user.model';
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from "sequelize-typescript";
+import { Post } from "./post.model";
+import { User } from "./user.model";
 
 @Table({
-  tableName: 'Comment',
+  tableName: "Comment",
 })
 export class Comment extends Model<Comment> {
   @Column({
@@ -14,17 +21,9 @@ export class Comment extends Model<Comment> {
   commentID!: number;
 
   @ForeignKey(() => User)
-  @Column({
-    type: DataType.INTEGER.UNSIGNED,
-    allowNull: false,
-  })
   userID!: number;
 
   @ForeignKey(() => Post)
-  @Column({
-    type: DataType.INTEGER.UNSIGNED,
-    allowNull: false,
-  })
   postID!: number;
 
   @Column({

@@ -1,13 +1,13 @@
-import { Model, Table, Column, DataType, HasMany } from 'sequelize-typescript';
-import { Post } from './post.model';
-import { Comment } from './comment.model';
+import { Model, Table, Column, DataType, HasMany } from "sequelize-typescript";
+import { Post } from "./post.model";
+import { Comment } from "./comment.model";
 
 @Table({
-  tableName: 'User',
+  tableName: "User",
 })
 export class User extends Model<User> {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   })
@@ -29,6 +29,9 @@ export class User extends Model<User> {
     type: DataType.STRING,
     allowNull: false,
     unique: true,
+    validate: {
+      isEmail: true, // Validar formato de correo electrónico
+    },
   })
   email!: string;
 
@@ -40,28 +43,29 @@ export class User extends Model<User> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   image?: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.DATEONLY,
     allowNull: false,
   })
-  birthdate!: string;
+  birthdate!: Date;
 
   @Column({
     type: DataType.TEXT,
+    allowNull: true,
   })
   description?: string;
 
   //* Relación con Publicaciones (Un usuario tiene muchas publicaciones)
   @HasMany(() => Post)
-  posts!: Post[];
+  posts?: Post[];
 
   //* Relación con Comentarios (Un usuario tiene muchos comentarios)
   @HasMany(() => Comment)
-  comments!: Comment[];
+  comments?: Comment[];
 
   /* Relación con Chats (Un usuario tiene muchos chats)
   @HasMany(() => Chat, 'user1ID')
