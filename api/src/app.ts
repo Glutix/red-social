@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 // rutas
-import userRoutes from "./Routes/user.route";
+import userRoutes from "./Routes/user.routes";
 
 //! imports library
 const express = require("express");
