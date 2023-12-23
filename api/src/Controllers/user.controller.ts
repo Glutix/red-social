@@ -4,7 +4,9 @@ import {
   getUserById,
   deleteOneUser,
   createNewUser,
+  updateUser,
 } from "../Services/user.services";
+import { UserInput } from "../Interaces/user.interfaces";
 
 export const getAllUser = async (_req: Request, res: Response) => {
   try {
@@ -46,6 +48,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
+
   try {
     const answer = await deleteOneUser(Number(id));
 
@@ -53,10 +56,22 @@ export const deleteUser = async (req: Request, res: Response) => {
       throw { status: 404, message: "No se ha encontrado el usuario" };
     }
 
-    return res.status(200).send({ message: "se borro" });
+    return res.status(200).json({ message: "Usuario eliminado correctamente" });
   } catch (error: any) {
     return res
-      .status(error?.status || 500)
-      .send({ error: error?.message || error });
+    .status(error?.status || 500)
+    .json({ error: error?.message || error });
+  }
+};
+
+export const updateUserById = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  const userInput: UserInput = req.body;
+
+  try {
+    const updatedUser = await updateUser(Number(userId), userInput);
+    return res.status(200).json({ message: "Usuario actualizado correctamente", data: updatedUser });
+  } catch (error: any) {
+    return res.status(error?.status || 500).json({ error: error?.message || error });
   }
 };

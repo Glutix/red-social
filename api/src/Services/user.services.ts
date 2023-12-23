@@ -66,10 +66,42 @@ export const deleteOneUser = async (id: number) => {
     const deleteUser = await User.destroy({ where: { userID: id } });
 
     if (!deleteUser) {
-      throw Error;
+      throw new Error("No se ha encontrado el usuario");
     }
-    return `Usuario eliminado con exito`;
+
+    return true; // Devuelve true si la eliminación fue exitosa
   } catch (error) {
-    return error;
+    throw error;
+  }
+};
+
+export const updateUser = async (userId: number, userInput: UserInput): Promise<User> => {
+  try {
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      throw new Error(`No existe un usuario con el id ${userId}`);
+    }
+
+    // Actualiza las propiedades si se proporcionan en el userInput
+    user.firstName = userInput.firstName || user.firstName;
+    user.lastName = userInput.lastName || user.lastName;
+    user.email = userInput.email || user.email;
+    user.password = userInput.password || user.password;
+    user.birthdate = userInput.birthdate || user.birthdate;
+    user.image = userInput.image || user.image;
+
+    user.description = userInput.description || user.description;
+
+    // Si se proporciona la propiedad isDeleted, realiza el borrado lógico
+    if (userInput.isDeleted !== undefined) {
+      user.isDeleted = userInput.isDeleted;
+    }
+
+    await user.save();
+
+    return user;
+  } catch (error) {
+    throw error;
   }
 };

@@ -59,6 +59,13 @@ export class User extends Model<User> {
   })
   description?: string;
 
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false, // Valor por defecto para el borrado lógico
+  })
+  isDeleted!: boolean;
+
   //* Relación con Publicaciones (Un usuario tiene muchas publicaciones)
   @HasMany(() => Post)
   posts?: Post[];

@@ -6,4 +6,5 @@ export interface UserInput {
   birthdate: Date;
   image?: string | undefined;
   description?: string | undefined;
+  isDeleted?: boolean;
 }
