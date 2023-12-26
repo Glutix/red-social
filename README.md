@@ -1,4 +1,4 @@
-Red-Social
+##Red-Social
 Este proyecto grupal tiene fines educativos y está diseñado como un sitio web estilo red social que permite a los usuarios interactuar entre sí.
 
 Requisitos Previos
