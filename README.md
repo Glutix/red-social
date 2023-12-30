@@ -64,8 +64,8 @@ sequelize
 Clonar el repositorio:
 
 ```bash
-git clone https://github.com/](https://github.com/Glutix/red-social.git
-cd red-social
+    git clone https://github.com/Glutix/red-social.git
+    cd red-social
 ```
 
 Una vez posicionado en red-social comenzamos por la api.
@@ -112,8 +112,8 @@ Para las variables de entorno en el cliente, creamos el archivo  `.env` en  /cli
 - VITE_HOST= Aqui
 
 ```bash
-cd api
-npm start
+    cd api
+    npm start
 ```
 
 
