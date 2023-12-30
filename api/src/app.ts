@@ -1,6 +1,6 @@
 //! imports library
 import { Request, Response } from "express";
-const express = require("express");
+import express from "express";
 
 //! Modulos
 import userRoutes from "./Routes/user.route";
