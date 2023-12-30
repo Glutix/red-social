@@ -11,17 +11,10 @@ El equipo de Red Social esta integrado por los siguientes miembros:
 
 
 ## Features
-
-- Product Catalogs: Users can browse different categories and explore the products available in the catalog.
-- Google Authentication: Allows users to log into the app using their Google accounts.
-- Image upload with Cloudinary: Users can upload product images using Cloudinary as a storage service.
-- Shopping cart: Users can add products to the shopping cart and proceed to the purchase process.
-- Stock control: The system manages the inventory and keeps track of the available stock for each product.
-- Filtering and ordering of products: Users can apply filters and order products according to different criteria.
-- Search by match: Users can search for products using search terms and get relevant results.
-- User profiles: Each user has a personalized profile where they can view and update their information.
-- CRUD of products and users: Administrators have the ability to create, read, update and delete products and users.
-- Dashboard admin: Provides a control panel for administrators with summary information and sales graphs.
+- Hacer una publicacion
+- Crear un perfil personlizado
+- Agregar amigos.
+- Eliminar un amigo
 
 ### Tecnologias usadas 🛠️
 
@@ -35,7 +28,7 @@ El equipo de Red Social esta integrado por los siguientes miembros:
 
 ### Dependencies 📋
 
-_front end packages:_
+_Front-End Packages:_
 
 ```
 react-router-dom
@@ -53,7 +46,7 @@ axios
 
 ```
 
-_back end packages:_
+_Back-End Packages:_
 
 ```
 nodemailer
@@ -71,7 +64,7 @@ sequelize
 Clonar el repositorio:
 
 ```bash
-git clone https://github.com/
+git clone https://github.com/](https://github.com/Glutix/red-social.git
 cd red-social
 ```
 
