@@ -1,8 +1,8 @@
 #Red-Social
-Este proyecto grupal tiene fines educativos y está diseñado como un sitio web estilo red social que permite a los usuarios interactuar entre sí.
+##Este proyecto grupal tiene fines educativos y está diseñado como un sitio web estilo red social que permite a los usuarios interactuar entre sí.
 
 #Requisitos Previos
-Asegúrate de tener instalado Node.js y npm en tu máquina. Además, necesitarás tener una base de datos compatible con Sequelize (en este proyecto usamos MySQL).
+##Asegúrate de tener instalado Node.js y npm en tu máquina. Además, necesitarás tener una base de datos compatible con Sequelize (en este proyecto usamos MySQL).
 
 #Instalación
 Clona el repositorio: git clone https://github.com/tuusuario/tu-aplicacion.git
