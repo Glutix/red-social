@@ -7,20 +7,20 @@ import {
   updateUserById,
   login,
 } from "../Controllers/user.controller";
-import validateToken from "./validate-token";
+import checkSession from "../Middleware/checkSession";
 
 const userRoutes = Router();
 
-userRoutes.get("/", validateToken, getAllUser);
+userRoutes.get("/", checkSession, getAllUser);
 
 userRoutes.get("/:userId", getOneUser);
-
-userRoutes.post("/", createUser);
 
 userRoutes.delete("/:id", deleteUser);
 
 userRoutes.put("/:userId", updateUserById);
 
-userRoutes.post("/login", login)
+//TODO: AUTH
+userRoutes.post("/register", createUser);
+userRoutes.post("/login", login);
 
 export default userRoutes;

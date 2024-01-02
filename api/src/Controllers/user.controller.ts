@@ -5,11 +5,9 @@ import {
 	deleteOneUser,
 	createNewUser,
 	updateUser,
+	userCredentials,
 } from "../Services/user.services";
-import { UserProps } from "../Types/types";
-import { User } from "../Models/user.model";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { Login, UserProps } from "../Types/types";
 
 export const getAllUser = async (_req: Request, res: Response) => {
 	try {
@@ -86,36 +84,17 @@ export const updateUserById = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-	const { email, password } = req.body;
-
 	try {
-		const usuario = await User.findOne({ where: { email } });
+		const userData: Login = req.body;
 
-		if (!usuario) {
-			throw new Error("El email " + email + " no se encuentra registrado.")
-		} else {
-			const userPassword = usuario.password;
-			// Comparamos password
-			bcrypt.compare(password, userPassword).then((result) => {
-				if (result) {
-					//login exitoso -- generamos el token
-					const token = jwt.sign({
-						email: email
-					}, process.env.SECRET_KEY || "pepito", {
-						expiresIn: "60000"
-					})
-
-					res.json({ token })
-				} else {
-					// Password incorrecto
-					res.json({ msg: "contraseña incorrecta" })
-				}
-			})
+		if (!userData.email || !userData.password) {
+			throw new Error("Faltan datos");
 		}
+		const data = await userCredentials(userData);
+		res.status(200).json(data);
 	} catch (error: any) {
-		return res
+		res
 			.status(error?.status || 500)
 			.json({ error: error?.message || error });
 	}
-
-}
+};
