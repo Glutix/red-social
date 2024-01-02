@@ -8,3 +8,8 @@ export interface UserInput {
   description?: string | undefined;
   isDeleted?: boolean;
 }
+
+export interface Login {
+  email: string;
+  password: string;
+}
