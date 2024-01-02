@@ -1,4 +1,4 @@
-export interface UserInput {
+export interface UserProps {
   firstName: string;
   lastName: string;
   email: string;
@@ -9,7 +9,4 @@ export interface UserInput {
   isDeleted?: boolean;
 }
 
-export interface Login {
-  email: string;
-  password: string;
-}
+type Login = Pick<UserProps, "email" | "password">

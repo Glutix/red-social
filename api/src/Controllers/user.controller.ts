@@ -6,7 +6,7 @@ import {
 	createNewUser,
 	updateUser,
 } from "../Services/user.services";
-import { UserInput } from "../Interaces/user.interfaces";
+import { UserProps } from "../Types/types";
 import { User } from "../Models/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -70,7 +70,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const updateUserById = async (req: Request, res: Response) => {
 	const { userId } = req.params;
-	const userInput: UserInput = req.body;
+	const userInput: UserProps = req.body;
 
 	try {
 		const updatedUser = await updateUser(Number(userId), userInput);
@@ -86,18 +86,18 @@ export const updateUserById = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-	const { email, password  } = req.body;
+	const { email, password } = req.body;
 
 	try {
 		const usuario = await User.findOne({ where: { email } });
 
-		if(!usuario) {
-			throw new Error ("El email " + email + " no se encuentra registrado.")
-		}else{
+		if (!usuario) {
+			throw new Error("El email " + email + " no se encuentra registrado.")
+		} else {
 			const userPassword = usuario.password;
 			// Comparamos password
 			bcrypt.compare(password, userPassword).then((result) => {
-				if(result){
+				if (result) {
 					//login exitoso -- generamos el token
 					const token = jwt.sign({
 						email: email
@@ -105,10 +105,10 @@ export const login = async (req: Request, res: Response) => {
 						expiresIn: "60000"
 					})
 
-					res.json({token})
-				}else {
+					res.json({ token })
+				} else {
 					// Password incorrecto
-					res.json({msg: "contraseña incorrecta"})
+					res.json({ msg: "contraseña incorrecta" })
 				}
 			})
 		}

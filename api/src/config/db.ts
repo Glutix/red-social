@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
-import { User } from "./Models/user.model";
-import { Post } from "./Models/post.model";
-import { Comment } from "./Models/comment.model";
+import { User } from "../Models/user.model";
+import { Post } from "../Models/post.model";
+import { Comment } from "../Models/comment.model";
 import dotenv from "dotenv";
 dotenv.config();
 

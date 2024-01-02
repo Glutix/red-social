@@ -1,7 +1,7 @@
 import { User } from "../Models/user.model";
 import bcrypt from "bcrypt";
 //! Interfaces
-import { UserInput, /* Login */ } from "../Interaces/user.interfaces";
+import { UserProps, /* Login */ } from "../Types/types";
 
 export const getUsers = async () => {
 	try {
@@ -30,7 +30,7 @@ export const getUserById = async (userId: number) => {
 	}
 };
 
-export const createNewUser = async (userInput: UserInput): Promise<User> => {
+export const createNewUser = async (userInput: UserProps): Promise<User> => {
 	try {
 		const hashedPassword = await bcrypt.hash(userInput.password, 10);
 		const {
@@ -84,7 +84,7 @@ export const deleteOneUser = async (id: number) => {
 
 export const updateUser = async (
 	userId: number,
-	userInput: UserInput
+	userInput: UserProps
 ): Promise<User> => {
 	try {
 		const user = await User.findByPk(userId);
