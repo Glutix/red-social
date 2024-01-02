@@ -6,4 +6,10 @@ export interface UserInput {
   birthdate: Date;
   image?: string | undefined;
   description?: string | undefined;
+  isDeleted?: boolean;
+}
+
+export interface Login {
+  email: string;
+  password: string;
 }

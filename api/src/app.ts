@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import express from "express";
 
 //! Modulos
-import userRoutes from "./Routes/user.route";
+import userRoutes from "./Routes/user.routes";
 
 const server = express();
 
