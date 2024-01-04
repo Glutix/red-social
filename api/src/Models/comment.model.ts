@@ -32,18 +32,6 @@ export class Comment extends Model<Comment> {
   })
   content!: string;
 
-  @Column({
-    type: DataType.DATE,
-    allowNull: false,
-  })
-  createdAt!: Date;
-
-  @Column({
-    type: DataType.DATE,
-    allowNull: false,
-  })
-  updatedAt!: Date;
-
   @BelongsTo(() => User)
   user!: User;
 

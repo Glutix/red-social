@@ -10,3 +10,22 @@ export interface UserProps {
 }
 
 type Login = Pick<UserProps, "email" | "password">
+
+export interface PostProps {
+  content: string;
+  images?: string[];
+  userID: number;
+}
+
+export interface ReactionProps {
+  reactionType: string;
+  userID: number;
+  postID: number;
+  commentID?: number; // Puedes ajustar esto según tus necesidades
+}
+
+export interface CommentProps {
+  content: string;
+  userID: number;
+  postID: number;
+}

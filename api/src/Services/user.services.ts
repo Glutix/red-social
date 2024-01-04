@@ -10,7 +10,7 @@ export const getUsers = async () => {
 		const users = await User.findAll();
 		return users;
 	} catch (error) {
-		return error;
+		throw error;
 	}
 };
 
@@ -22,7 +22,7 @@ export const getUserById = async (userId: number) => {
 			throw new Error(`No existe un usuario con el id ${userId}`);
 		return existingUser;
 	} catch (error) {
-		return error;
+		throw error;
 	}
 };
 

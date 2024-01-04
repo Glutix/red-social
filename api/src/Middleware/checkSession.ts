@@ -22,7 +22,7 @@ const checkSession = (req: Request, res: Response, next: NextFunction) => {
       //? Verificar si el token es valido
       const tokenValido = verifyToken(bearerToken)
       if (!tokenValido) {
-        throw new Error("Su session ya expiro.")
+        throw new Error("Su sesión ya expiro.")
       }
       next();
 

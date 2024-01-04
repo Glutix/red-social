@@ -3,78 +3,78 @@ import { Post } from "./post.model";
 import { Comment } from "./comment.model";
 
 @Table({
-  tableName: "User",
+	tableName: "User",
 })
 export class User extends Model<User> {
-  @Column({
-    type: DataType.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  })
-  userID!: number;
+	@Column({
+		type: DataType.INTEGER,
+		autoIncrement: true,
+		primaryKey: true,
+	})
+	userID!: number;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  firstName!: string;
+	@Column({
+		type: DataType.STRING,
+		allowNull: false,
+	})
+	firstName!: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  lastName!: string;
+	@Column({
+		type: DataType.STRING,
+		allowNull: false,
+	})
+	lastName!: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true, // Validar formato de correo electrónico
-    },
-  })
-  email!: string;
+	@Column({
+		type: DataType.STRING,
+		allowNull: false,
+		unique: true,
+		validate: {
+			isEmail: true, // Validar formato de correo electrónico
+		},
+	})
+	email!: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  password!: string;
+	@Column({
+		type: DataType.STRING,
+		allowNull: false,
+	})
+	password!: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: true,
-  })
-  image?: string;
+	@Column({
+		type: DataType.STRING,
+		allowNull: true,
+	})
+	image?: string;
 
-  @Column({
-    type: DataType.DATEONLY,
-    allowNull: false,
-  })
-  birthdate!: Date;
+	@Column({
+		type: DataType.DATEONLY,
+		allowNull: false,
+	})
+	birthdate!: Date;
 
-  @Column({
-    type: DataType.TEXT,
-    allowNull: true,
-  })
-  description?: string;
+	@Column({
+		type: DataType.TEXT,
+		allowNull: true,
+	})
+	description?: string;
 
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-    defaultValue: false, // Valor por defecto para el borrado lógico
-  })
-  isDeleted!: boolean;
+	@Column({
+		type: DataType.BOOLEAN,
+		allowNull: false,
+		defaultValue: false, // Valor por defecto para el borrado lógico
+	})
+	isDeleted!: boolean;
 
-  //* Relación con Publicaciones (Un usuario tiene muchas publicaciones)
-  @HasMany(() => Post)
-  posts?: Post[];
+	//* Relación con Publicaciones (Un usuario tiene muchas publicaciones)
+	@HasMany(() => Post)
+	posts?: Post[];
 
-  //* Relación con Comentarios (Un usuario tiene muchos comentarios)
-  @HasMany(() => Comment)
+	//* Relación con Comentarios (Un usuario tiene muchos comentarios)
+	@HasMany(() => Comment)
   comments?: Comment[];
 
-  /* Relación con Chats (Un usuario tiene muchos chats)
+	/* Relación con Chats (Un usuario tiene muchos chats)
   @HasMany(() => Chat, 'user1ID')
   chats1!: Chat[];
 

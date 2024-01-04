@@ -4,6 +4,7 @@ import express from "express";
 
 //! Modulos
 import userRoutes from "./Routes/user.routes";
+import postRoutes from "./Routes/posts.routes";
 
 const server = express();
 
@@ -16,5 +17,6 @@ server.get("/", (req: Request, res: Response) => {
 });
 
 server.use("/users", userRoutes);
+server.use("/post", postRoutes);
 
 export default server;
