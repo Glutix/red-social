@@ -3,7 +3,7 @@ import { encryptPassword, verifyPassword } from "../Utils/bcryptHandle";
 import { generateToken } from "../Utils/jwtHandle";
 
 //! Interfaces
-import { Login, UserProps, /* Login */ } from "../Types/types";
+import { Login, UserProps } from "../Types/types";
 
 export const getUsers = async () => {
 	try {

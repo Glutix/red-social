@@ -22,6 +22,7 @@ const database = new Sequelize({
   logging: (msg) => !msg.includes("Executing"),
 });
 
+//! solo para encontrar un error que no sabia como arreglarlo, se puede quitar
 database
   .authenticate()
   .then(() => {

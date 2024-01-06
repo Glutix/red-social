@@ -27,10 +27,16 @@ export class Comment extends Model<Comment> {
   postID!: number;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT, // Puedes cambiar a DataType.TEXT para permitir texto más largo
     allowNull: false,
   })
   content!: string;
+
+  @Column({
+    type: DataType.JSON,
+    allowNull: true,
+  })
+  images?: string[]
 
   @BelongsTo(() => User)
   user!: User;
