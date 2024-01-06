@@ -34,9 +34,9 @@ export const getOneUser = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
 	try {
-		const UserInput = req.body;
+		const userInput = req.body;
 
-		const newUser = await createNewUser(UserInput);
+		const newUser = await createNewUser(userInput);
 
 		return res
 			.status(200)

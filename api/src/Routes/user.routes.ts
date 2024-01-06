@@ -8,6 +8,7 @@ import {
   login,
 } from "../Controllers/user.controller";
 import checkSession from "../Middleware/checkSession";
+import validateCreateUser from "../Validators/users";
 
 const userRoutes = Router();
 
@@ -20,7 +21,7 @@ userRoutes.delete("/:id", deleteUser);
 userRoutes.put("/:userId", updateUserById);
 
 //TODO: AUTH
-userRoutes.post("/register", createUser);
+userRoutes.post("/register", validateCreateUser, createUser);
 userRoutes.post("/login", login);
 
 export default userRoutes;
