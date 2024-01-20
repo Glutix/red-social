@@ -3,7 +3,10 @@ import { Request, Response } from "express";
 import express from "express";
 
 //! Modulos
-import userRoutes from "./Routes/user.routes";
+import userRoutes from "./routes/user.routes";
+import authRouter from "./routes/auth.routes";
+import postRouter from "./routes/posts.routes";
+import commentRouter from "./routes/comment.routes";
 
 const server = express();
 
@@ -16,5 +19,8 @@ server.get("/", (req: Request, res: Response) => {
 });
 
 server.use("/users", userRoutes);
+server.use("/auth", authRouter);
+server.use("/post", postRouter);
+server.use("/comment", commentRouter);
 
 export default server;

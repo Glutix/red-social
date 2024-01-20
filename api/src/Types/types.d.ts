@@ -9,4 +9,24 @@ export interface UserProps {
   isDeleted?: boolean;
 }
 
-type Login = Pick<UserProps, "email" | "password">
+type Login = Pick<UserProps, "email" | "password">;
+
+export interface PostProps {
+  content: string;
+  images?: string[];
+  userID: number;
+}
+
+export interface ReactionProps {
+  reactionType: string;
+  userID: number;
+  postID: number;
+  commentID?: number; // Puedes ajustar esto según tus necesidades
+}
+
+export interface CommentProps {
+  content: string;
+  images?: string[];
+  userID: number;
+  postID: number;
+}

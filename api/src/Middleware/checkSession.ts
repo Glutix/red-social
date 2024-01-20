@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { verifyToken } from "../Utils/jwtHandle";
+import { verifyToken } from "../utils/jwtHandle";
 
 const checkSession = (req: Request, res: Response, next: NextFunction) => {
   const headerToken = req.headers["authorization"];
@@ -20,20 +20,18 @@ const checkSession = (req: Request, res: Response, next: NextFunction) => {
       const bearerToken = headerToken.slice(7);
 
       //? Verificar si el token es valido
-      const tokenValido = verifyToken(bearerToken)
+      const tokenValido = verifyToken(bearerToken);
       if (!tokenValido) {
-        throw new Error("Su session ya expiro.")
+        throw new Error("Su session ya expiro.");
       }
       next();
-
     } else {
       //? No tiene token
-      throw new Error("Acesso Denegado.")
+      throw new Error("Acesso Denegado.");
     }
-
   } catch (error) {
-    res.status(400).json(error)
+    res.status(400).json(error);
   }
-}
+};
 
-export default checkSession
+export default checkSession;

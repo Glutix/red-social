@@ -1,15 +1,21 @@
-import { Model, Table, Column, DataType, ForeignKey, HasMany, BelongsTo } from 'sequelize-typescript';
-import { User } from './user.model';
-import { Comment } from './comment.model';
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  ForeignKey,
+  HasMany,
+  BelongsTo,
+} from "sequelize-typescript";
+import { User } from "./user.model";
+import { Comment } from "./comment.model";
 
-
-@Table ({
-  tableName: "Post"
+@Table({
+  tableName: "Post",
 })
-
-export class Post extends Model<Post> { 
+export class Post extends Model<Post> {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   })
@@ -21,24 +27,18 @@ export class Post extends Model<Post> {
   })
   content!: string;
 
-
   @Column({
-    type: DataType.STRING,
-    allowNull: false,
+    type: DataType.JSON,
+    allowNull: true,
   })
-  image!: string;
-
-
+  images?: string[];
 
   @ForeignKey(() => User)
   userID!: number;
 
-
   @BelongsTo(() => User)
   user!: User;
 
-
-  @HasMany (() => Comment)
-  comments!: Comment[]
-
+  @HasMany(() => Comment)
+  comments!: Comment[];
 }

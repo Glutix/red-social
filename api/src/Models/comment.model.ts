@@ -27,22 +27,16 @@ export class Comment extends Model<Comment> {
   postID!: number;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT, // Puedes cambiar a DataType.TEXT para permitir texto más largo
     allowNull: false,
   })
   content!: string;
 
   @Column({
-    type: DataType.DATE,
-    allowNull: false,
+    type: DataType.JSON,
+    allowNull: true,
   })
-  createdAt!: Date;
-
-  @Column({
-    type: DataType.DATE,
-    allowNull: false,
-  })
-  updatedAt!: Date;
+  images?: string[];
 
   @BelongsTo(() => User)
   user!: User;
