@@ -1,16 +1,20 @@
 import { Response, Request } from "express";
-import { createUser, userCredentials } from "../services/auth.services";
+import { /* createUser, */ userCredentials } from "../services/auth.services";
 import { Login } from "../types/types";
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
-    const userInput = req.body;
+    const result = req.body;
+    console.log(result);
+    /* const userInput = req.body;
 
     const newUser = await createUser(userInput);
 
     return res
       .status(200)
       .json({ message: "Usuario creado correctamente.", data: newUser });
+   */
+    return res.status(200).json({ message: "Usuario creado correctamente." });
   } catch (error: any) {
     return res
       .status(error?.status || 500)

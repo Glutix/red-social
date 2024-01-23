@@ -30,3 +30,14 @@ export interface CommentProps {
   userID: number;
   postID: number;
 }
+
+type NameErrorMessages = {
+  regexError: string;
+  lengthMinError: string;
+  lengthMaxError: string;
+};
+
+interface PropsErrorMessages {
+  firstName: NameErrorMessages;
+  lastName: NameErrorMessages;
+}
