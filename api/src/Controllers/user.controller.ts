@@ -5,7 +5,7 @@ import {
   deleteOneUser,
   updateUser,
 } from "../services/user.services";
-import { UserProps } from "../types/types";
+import { UserProps } from "../types/user.types";
 
 export const getAllUser = async (_req: Request, res: Response) => {
   try {

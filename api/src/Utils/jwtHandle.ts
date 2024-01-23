@@ -1,5 +1,5 @@
 import { sign, verify } from "jsonwebtoken";
-import { UserProps } from "../types/types";
+import { UserProps } from "../types/user.types";
 const SECRET_KEY = process.env.SECRET_KEY || "token-random";
 
 const generateToken = async (user: UserProps) => {

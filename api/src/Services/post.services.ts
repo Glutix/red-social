@@ -1,5 +1,5 @@
 import { Post } from "../models/post.model";
-import { PostProps } from "../types/types";
+import { PostProps } from "../types/post.types";
 
 export const createPost = async (postInput: PostProps): Promise<Post> => {
   //! Lógica para crear una nueva publicación en la base de datos

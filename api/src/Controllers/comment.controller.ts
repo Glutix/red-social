@@ -6,7 +6,7 @@ import {
   updateComment,
   deleteComment,
 } from "../services/comment.services";
-import { CommentProps } from "../types/types";
+import { CommentProps } from "../types/comment.types";
 
 export const createCommentController = async (req: Request, res: Response) => {
   //! Lógica para crear un nuevo comentario

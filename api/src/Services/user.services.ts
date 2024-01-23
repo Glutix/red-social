@@ -2,7 +2,7 @@ import { User } from "../models/user.model";
 import { encryptPassword } from "../utils/bcryptHandle";
 
 //! Interfaces
-import { UserProps /* Login */ } from "../types/types";
+import { UserProps /* Login */ } from "../types/user.types";
 
 export const getUsers = async () => {
   try {

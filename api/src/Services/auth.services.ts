@@ -1,5 +1,5 @@
 import { User } from "../models/user.model";
-import { Login, UserProps } from "../types/types";
+import { Login, UserProps } from "../types/user.types";
 import { encryptPassword, verifyPassword } from "../utils/bcryptHandle";
 import { generateToken } from "../utils/jwtHandle";
 
@@ -16,9 +16,6 @@ export const createUser = async (userInput: UserProps): Promise<User> => {
       description,
     } = userInput;
 
-    if (!firstName || !lastName || !email || !password || !birthdate) {
-      throw new Error("Falto informacion para crear el usuario.");
-    }
     const existingUser = await User.findOne({ where: { email } });
 
     if (existingUser) {
@@ -52,9 +49,12 @@ export const userCredentials = async (userData: Login) => {
 
     //? Validacion user
     if (!userExist?.email) {
-      throw new Error(
-        `El email: ${userData.email}, no se encuentra registrado.`
-      );
+      throw [
+        {
+          path: ["email"],
+          message: `El email: ${userData.email}, no se encuentra registrado.`,
+        },
+      ];
     }
 
     //? Comparamos password
@@ -62,7 +62,14 @@ export const userCredentials = async (userData: Login) => {
     const isCorrect = await verifyPassword(userData.password, passwordHash);
 
     //? si no coincide
-    if (!isCorrect) throw new Error("contraseña incorrecta");
+    if (!isCorrect) {
+      throw [
+        {
+          path: ["password"],
+          message: "Contraseña incorrecta",
+        },
+      ];
+    }
 
     //? generamos el token
     const token = await generateToken(userExist);

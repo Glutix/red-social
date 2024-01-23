@@ -1,5 +1,5 @@
 import { Comment } from "../models/comment.model";
-import { CommentProps } from "../types/types";
+import { CommentProps } from "../types/comment.types";
 
 export const createComment = async (
   commentInput: CommentProps
