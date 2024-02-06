@@ -19,7 +19,12 @@ export const createUser = async (userInput: UserProps): Promise<User> => {
     const existingUser = await User.findOne({ where: { email } });
 
     if (existingUser) {
-      throw new Error("Ya existe un usuario con este correo electrónico");
+      throw [
+        {
+          path: ["email"],
+          message: "Ya existe un usuario con este correo electrónico",
+        },
+      ];
     }
 
     const hashedPassword = await encryptPassword(password);

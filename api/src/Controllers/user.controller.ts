@@ -12,9 +12,7 @@ export const getAllUser = async (_req: Request, res: Response) => {
     const users = await getUsers();
     return res.status(200).send(users);
   } catch (error: any) {
-    return res
-      .status(error?.status || 500)
-      .send({ error: error?.message || error });
+    return res.status(error?.status || 500).json(error);
   }
 };
 
@@ -24,9 +22,7 @@ export const getOneUser = async (req: Request, res: Response) => {
     const user = await getUserById(Number(userId));
     return res.status(200).send(user);
   } catch (error: any) {
-    return res
-      .status(error?.status || 500)
-      .send({ error: error?.message || error });
+    return res.status(error?.status || 500).json(error);
   }
 };
 
@@ -36,15 +32,9 @@ export const deleteUser = async (req: Request, res: Response) => {
   try {
     const answer = await deleteOneUser(Number(id));
 
-    if (!answer) {
-      throw { status: 404, message: "No se ha encontrado el usuario" };
-    }
-
-    return res.status(200).json({ message: "Usuario eliminado correctamente" });
+    res.status(200).send(answer);
   } catch (error: any) {
-    return res
-      .status(error?.status || 500)
-      .json({ error: error?.message || error });
+    return res.status(error?.status || 500).json(error);
   }
 };
 
@@ -54,13 +44,12 @@ export const updateUserById = async (req: Request, res: Response) => {
 
   try {
     const updatedUser = await updateUser(Number(userId), userInput);
+
     return res.status(200).json({
       message: "Usuario actualizado correctamente",
       data: updatedUser,
     });
   } catch (error: any) {
-    return res
-      .status(error?.status || 500)
-      .json({ error: error?.message || error });
+    return res.status(error?.status || 500).json(error);
   }
 };
