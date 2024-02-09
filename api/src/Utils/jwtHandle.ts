@@ -8,6 +8,10 @@ const generateToken = async (user: UserProps) => {
 };
 
 const verifyToken = (jwt: string) => {
+  if (typeof jwt !== "string") {
+    throw new Error("jwt no es un sting");
+  }
+
   const isUser = verify(jwt, SECRET_KEY);
   return isUser;
 };

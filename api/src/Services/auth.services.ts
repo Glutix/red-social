@@ -1,5 +1,6 @@
 import { User } from "../models/user.model";
 import { Login, UserProps } from "../types/user.types";
+import { apiError } from "../utils/apiError";
 import { encryptPassword, verifyPassword } from "../utils/bcryptHandle";
 import { generateToken } from "../utils/jwtHandle";
 
@@ -19,12 +20,10 @@ export const createUser = async (userInput: UserProps): Promise<User> => {
     const existingUser = await User.findOne({ where: { email } });
 
     if (existingUser) {
-      throw [
-        {
-          path: ["email"],
-          message: "Ya existe un usuario con este correo electrónico",
-        },
-      ];
+      throw apiError(
+        "email",
+        "El correo electrónico ya se encuentra registrado."
+      );
     }
 
     const hashedPassword = await encryptPassword(password);
@@ -54,12 +53,10 @@ export const userCredentials = async (userData: Login) => {
 
     //? Validacion user
     if (!userExist?.email) {
-      throw [
-        {
-          path: ["email"],
-          message: `El email: ${userData.email}, no se encuentra registrado.`,
-        },
-      ];
+      throw apiError(
+        "email",
+        `El email: ${userData.email}, no se encuentra registrado.`
+      );
     }
 
     //? Comparamos password
@@ -68,12 +65,7 @@ export const userCredentials = async (userData: Login) => {
 
     //? si no coincide
     if (!isCorrect) {
-      throw [
-        {
-          path: ["password"],
-          message: "Contraseña incorrecta",
-        },
-      ];
+      throw apiError("password", "Contraseña incorrecta");
     }
 
     //? generamos el token

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/jwtHandle";
+import { recoverToken } from "../utils/recoverToken";
 
 const checkSession = (req: Request, res: Response, next: NextFunction) => {
   const headerToken = req.headers["authorization"];
@@ -10,25 +11,21 @@ const checkSession = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    if (headerToken != undefined && headerToken.startsWith("Bearer ")) {
-      //Tiene token
-      /* Extraer token 1
-      const bearerToken = headerToken.split(" ");
-      console.log(bearerToken[1]); */
+    //? Extraer token
+    const token = recoverToken(headerToken);
 
-      //? Extraer token 2
-      const bearerToken = headerToken.slice(7);
-
-      //? Verificar si el token es valido
-      const tokenValido = verifyToken(bearerToken);
-      if (!tokenValido) {
-        throw new Error("Su session ya expiro.");
-      }
-      next();
-    } else {
+    if (!token) {
       //? No tiene token
       throw new Error("Acesso Denegado.");
     }
+
+    //? Verificar si el token es valido
+    const tokenValido = verifyToken(token);
+    if (!tokenValido) {
+      throw new Error("Su session ya expiro.");
+    }
+
+    next();
   } catch (error) {
     res.status(400).json(error);
   }

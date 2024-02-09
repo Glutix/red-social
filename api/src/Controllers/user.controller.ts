@@ -6,6 +6,9 @@ import {
   updateUser,
 } from "../services/user.services";
 import { UserProps } from "../types/user.types";
+import { recoverToken } from "../utils/recoverToken";
+import { verifyToken } from "../utils/jwtHandle";
+import { User } from "../models/user.model";
 
 export const getAllUser = async (_req: Request, res: Response) => {
   try {
@@ -27,10 +30,13 @@ export const getOneUser = async (req: Request, res: Response) => {
 };
 
 export const deleteUser = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
   try {
-    const answer = await deleteOneUser(Number(id));
+    const headerToken = req.headers["authorization"];
+    const token = recoverToken(headerToken);
+    const { user: userInfo } = verifyToken(token) as { user: User };
+    const { userID } = userInfo;
+
+    const answer = await deleteOneUser(Number(userID));
 
     res.status(200).send(answer);
   } catch (error: any) {
@@ -39,11 +45,13 @@ export const deleteUser = async (req: Request, res: Response) => {
 };
 
 export const updateUserById = async (req: Request, res: Response) => {
-  const { userId } = req.params;
-  const userInput: UserProps = req.body;
-
   try {
-    const updatedUser = await updateUser(Number(userId), userInput);
+    const userInput: UserProps = req.body;
+    const headerToken = req.headers["authorization"];
+    const token = recoverToken(headerToken);
+    const { user: userInfo } = verifyToken(token) as { user: User };
+
+    const updatedUser = await updateUser(userInfo, userInput);
 
     return res.status(200).json({
       message: "Usuario actualizado correctamente",

@@ -25,6 +25,7 @@ export const getUserById = async (userId: number): Promise<User> => {
     if (!existingUser) {
       throw apiError("users", `No existe un usuario con el id ${userId}`);
     }
+
     return existingUser;
   } catch (error: any) {
     return error;
@@ -33,41 +34,31 @@ export const getUserById = async (userId: number): Promise<User> => {
 
 export const deleteOneUser = async (id: number) => {
   try {
-    const deleteUser = await User.destroy({ where: { userID: id } });
-
-    if (!deleteUser) {
-      throw apiError("users", "No se ha encontrado el usuario");
-    }
-
+    const user = await getUserById(id);
+    user.isDeleted = true;
+    await user.save();
     return { message: "Usuario borrado correctamente." };
   } catch (error) {
     throw error;
   }
 };
 
-export const updateUser = async (userId: number, userInput: UserProps) => {
+export const updateUser = async (userInfo: User, userInput: UserProps) => {
   try {
-    const user = await getUserById(userId);
+    const user = await getUserById(userInfo.userID);
 
-    const hashedPassword = await encryptPassword(userInput.password);
+    const hashedPassword = userInput?.password
+      ? await encryptPassword(userInput.password)
+      : null;
 
-    // Actualiza las propiedades si se proporcionan en el userInput
+    //? Combina las propiedades de userInput en user
+    Object.assign(user, userInput);
 
-    user.firstName = userInput.firstName || user.firstName;
-    user.lastName = userInput.lastName || user.lastName;
-    user.email = userInput.email || user.email;
-    user.password = hashedPassword || user.password;
-    user.birthdate = userInput.birthdate || user.birthdate;
-    user.image = userInput.image || user.image;
-    user.description = userInput.description || user.description;
-
-    // Si se proporciona la propiedad isDeleted, realiza el borrado lógico
-    if (userInput.isDeleted !== undefined) {
-      user.isDeleted = userInput.isDeleted;
+    if (hashedPassword) {
+      user.dataValues.password = hashedPassword;
     }
 
-    //await user.save();
-
+    await user.save();
     return user;
   } catch (error) {
     throw error;
