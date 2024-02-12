@@ -10,7 +10,6 @@ import {
 export const createPostController = async (req: Request, res: Response) => {
   try {
     const PostInput = req.body;
-
     const newPost = await createPost(PostInput);
 
     return res

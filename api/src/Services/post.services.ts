@@ -2,17 +2,8 @@ import { Post } from "../models/post.model";
 import { PostProps } from "../types/post.types";
 
 export const createPost = async (postInput: PostProps): Promise<Post> => {
-  //! Lógica para crear una nueva publicación en la base de datos
   try {
     const { content, images, userID } = postInput;
-
-    if (!content) {
-      throw new Error("No puedes crear una publicación sin un mensaje.");
-    } else if (!userID) {
-      throw new Error(
-        "No puedes crear una publicación si no iniciaste sesión."
-      );
-    }
 
     const newPost = await Post.create({
       content,
@@ -27,7 +18,6 @@ export const createPost = async (postInput: PostProps): Promise<Post> => {
 };
 
 export const getPosts = async () => {
-  //! Lógica para obtener todas las publicaciones de la base de datos
   try {
     const posts = await Post.findAll();
     return posts;
@@ -37,7 +27,6 @@ export const getPosts = async () => {
 };
 
 export const getPostsByUserId = async (userId: number) => {
-  //! Lógica para obtener todas las publicaciones de un usuario (userID)
   try {
     const userPosts = await Post.findAll({
       where: { userID: userId },

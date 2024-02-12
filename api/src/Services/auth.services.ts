@@ -73,7 +73,7 @@ export const userCredentials = async (userData: Login) => {
 
     const data = {
       token,
-      user: userExist,
+      userID: userExist.userID,
     };
 
     return data;
