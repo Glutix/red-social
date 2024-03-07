@@ -1,5 +1,5 @@
 import server from "./src/app";
-import database from "./src/db";
+import database from "./src/config/db";
 
 const PORT = process.env.PORT || 3002;
 

@@ -25,24 +25,14 @@ El equipo de Red Social esta integrado por los siguientes miembros:
 - [Express](https://expressjs.com/) - Framework Backend
 - [Node](https://nodejs.org/es) - Entorno de ejecucion
 - [Redux Toolkit](https://redux-toolkit.js.org/) - Estado Global
+- [Zod](https://zod.dev/) - Validación de datos
 
 ### Dependencies 📋
 
 _Front-End Packages:_
 
 ```
-react-router-dom
-react-icons
-react-toastify
-react-redux
-redux-toolkit
-sweetalert
-jwt-decode
-react-dropzone
-react-oauth/google
-reduxjs/toolkit
-@types/chart.js
-axios
+en progreso
 
 ```
 
