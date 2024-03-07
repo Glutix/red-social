@@ -1,0 +1,30 @@
+.container {
+  width: 100%;
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(300px, 448px) minmax(400px, 1fr);
+  align-items: center;
+  justify-items: center;
+  background: linear-gradient(#989898, #efefef);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+  width: 65ch;
+}
+
+.title {
+  font-size: 60px;
+  font-weight: bold;
+  color: blue;
+  line-height: 60px;
+}
+
+.slogan {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 30px;
+}

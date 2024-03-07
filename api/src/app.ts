@@ -1,6 +1,7 @@
 //! imports library
 import { Request, Response } from "express";
 import express from "express";
+import cors from "./middleware/cors";
 
 //! Modulos
 import userRoutes from "./routes/user.routes";
@@ -12,6 +13,7 @@ const server = express();
 
 //! Midleware
 server.use(express.json());
+server.use(cors);
 
 //! Routes
 server.get("/", (req: Request, res: Response) => {
