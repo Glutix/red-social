@@ -9,47 +9,49 @@
 }
 
 .form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
+  width: 50%;
+  height: 80%;
   border-radius: 10px;
+  gap: 2rem;
+  justify-content: center;
+  padding: 1rem 2rem 1rem 2rem;
+  box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.fullName {
+  display: flex;
   gap: 1rem;
-  padding: 4rem;
-
-  grid-template-areas:
-    "name lastName"
-    "email email"
-    "password password"
-    "button button";
-
-  & .input {
-    text-align: center;
-    width: 100%;
-    height: 3rem;
-    border-radius: 12px;
-    padding: 1rem;
-    border: solid 1px #3c3c3c;
-  }
 }
 
-.input:nth-child(1) {
-  grid-area: name;
+.date {
+  display: grid;
+  grid-template-columns: 18ch 1fr;
+  align-items: center;
 }
-
-.input:nth-child(2) {
-  grid-area: lastName;
+.input {
+  text-align: center;
+  width: 100%;
+  height: 2rem;
+  border-radius: 12px;
+  border: solid 1px #3c3c3c;
 }
-
-.input:nth-child(3) {
-  grid-area: email;
-}
-
-.input:nth-child(4) {
-  grid-area: password;
+.description {
+  text-align: center;
+  height: 4rem;
 }
 
 .button {
   grid-area: button;
-  background-color: green;
+  background-color: rgb(19, 179, 19);
+  border-radius: 8px;
+  transition: 1s ease;
+  cursor: pointer;
+  height: 2rem;
+}
+
+.button:hover {
+  background: rgb(7, 247, 67);
 }

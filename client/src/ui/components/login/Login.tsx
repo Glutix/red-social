@@ -1,32 +1,22 @@
 "use client";
 import { ChangeEvent, FormEvent, useState } from "react";
 import style from "./Login.module.css";
-import Home from "@/app/page";
+import { fetchLoginUser } from "@/lib/api";
+
 const Login = () => {
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch("http://localhost:3001/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(input),
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        if (response.token) {
-          localStorage.setItem("token", response.token);
-          window.location.href = "/home";
-        } else {
-          console.log(response);
-        }
-      })
-      .catch((err) => console.log("error: ", err));
+    const userCredentials = await fetchLoginUser(input.email, input.password);
+    if (userCredentials.token) {
+      alert("logiaste uwu");
+    } else {
+      alert("No logiaste");
+    }
   };
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {

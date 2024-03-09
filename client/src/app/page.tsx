@@ -1,5 +1,5 @@
 import style from "./Home.module.css";
-import Login from "@/components/login/Login";
+import Login from "@/ui/components/login/Login";
 
 export default function Home() {
   return (
