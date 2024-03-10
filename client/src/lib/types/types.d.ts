@@ -14,3 +14,12 @@ export interface RegisterProps {
   description: string | undefined;
   birthdate: string;
 }
+
+export interface UserProps extends RegisterProps {
+  userID: number;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type UserInfo = UserInfoProps[];

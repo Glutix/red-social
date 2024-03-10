@@ -1,4 +1,2 @@
-import { ValidationError } from "@/lib/types/IssuesAPI";
-const viewErrorLogin = (issues: ValidationError) => {
-
-};
+import { ValidationError } from "@/lib/types/types";
+const viewErrorLogin = (issues: ValidationError) => {};
