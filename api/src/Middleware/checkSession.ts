@@ -3,16 +3,17 @@ import { verifyToken } from "../utils/jwtHandle";
 import { recoverToken } from "../utils/recoverToken";
 
 const checkSession = (req: Request, res: Response, next: NextFunction) => {
-  const headerToken = req.headers["authorization"];
-  if (!headerToken) {
+  const coockieToken = req.headers.cookie;
+  console.log(req.headers);
+  if (!coockieToken) {
     return res
       .status(401)
       .json({ error: "No se proporcionó un token de autenticación" });
   }
 
   try {
-    //? Extraer token
-    const token = recoverToken(headerToken);
+    //? Extraer token de la coockie
+    const token = recoverToken(coockieToken);
 
     if (!token) {
       //? No tiene token

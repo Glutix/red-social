@@ -5,7 +5,7 @@ import { encryptPassword, verifyPassword } from "../utils/bcryptHandle";
 import { generateToken } from "../utils/jwtHandle";
 
 //TODO: AUTH
-export const createUser = async (userInput: UserProps): Promise<User> => {
+export const createUser = async (userInput: UserProps) => {
   try {
     const {
       firstName,
@@ -51,24 +51,17 @@ export const userCredentials = async (userData: Login) => {
       },
     });
 
-    //? Validacion user
     if (!userExist?.email) {
-      throw apiError(
-        "email",
-        `El email: ${userData.email}, no se encuentra registrado.`
-      );
+      throw apiError("email", `Email invalido`);
     }
 
-    //? Comparamos password
     const passwordHash = userExist.password;
     const isCorrect = await verifyPassword(userData.password, passwordHash);
 
-    //? si no coincide
     if (!isCorrect) {
       throw apiError("password", "Contraseña incorrecta");
     }
 
-    //? generamos el token
     const token = await generateToken(userExist);
 
     const data = {
@@ -77,7 +70,7 @@ export const userCredentials = async (userData: Login) => {
     };
 
     return data;
-  } catch (error) {
+  } catch (error: any) {
     throw error;
   }
 };

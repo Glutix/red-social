@@ -1,17 +1,17 @@
 import { Response, Request } from "express";
 import { createUser, userCredentials } from "../services/auth.services";
 import { Login } from "../types/user.types";
+import { STATUS_CODE } from "../constants/constants";
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
     const userInput = req.body;
-    const newUser = await createUser(userInput);
-
+    await createUser(userInput);
     return res
-      .status(200)
-      .json({ message: "Usuario creado correctamente.", data: newUser });
+      .status(STATUS_CODE.CREATED)
+      .json({ message: "Usuario creado correctamente." });
   } catch (error: any) {
-    return res.status(400).json(error);
+    return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json(error);
   }
 };
 
@@ -19,8 +19,15 @@ export const login = async (req: Request, res: Response) => {
   try {
     const userData: Login = req.body;
     const data = await userCredentials(userData);
-    res.status(200).json(data);
+
+    return res
+      .status(STATUS_CODE.OK)
+      .cookie("token", data.token, {
+        expires: new Date(Date.now() + 24 * 3600000),
+        httpOnly: true,
+      })
+      .json({ message: "Inicio de secion correctamente." });
   } catch (error: any) {
-    return res.status(400).json(error);
+    return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json(error);
   }
 };

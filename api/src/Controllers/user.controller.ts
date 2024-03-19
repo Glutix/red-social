@@ -9,13 +9,14 @@ import { UserProps } from "../types/user.types";
 import { recoverToken } from "../utils/recoverToken";
 import { verifyToken } from "../utils/jwtHandle";
 import { User } from "../models/user.model";
+import { STATUS_CODE } from "../constants/constants";
 
 export const getAllUser = async (_req: Request, res: Response) => {
   try {
     const users = await getUsers();
-    return res.status(200).send(users);
+    return res.status(STATUS_CODE.OK).send(users);
   } catch (error: any) {
-    return res.status(error?.status || 500).json(error);
+    return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json(error);
   }
 };
 
