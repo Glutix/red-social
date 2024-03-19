@@ -23,3 +23,8 @@ export interface UserProps extends RegisterProps {
 }
 
 export type UserInfo = UserInfoProps[];
+
+export type UserLogin = {
+  email: string;
+  password: string;
+};

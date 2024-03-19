@@ -1,20 +1,19 @@
 import { RegisterProps, UserInfo } from "@/lib/types/types";
 const URL = process.env.NEXT_PUBLIC_API_URL;
+import { UserLogin } from "@/lib/types/types";
 
-export const fetchLoginUser = async (email: string, password: string) => {
+export const fetchLoginUser = async (userInput: UserLogin) => {
   try {
-    const res = await fetch(`${URL}/auth/login`, {
+    const response = await fetch(`${URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
+      body: JSON.stringify(userInput),
+      credentials: "include",
     });
-    const data = await res.json();
-    return data;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -28,6 +27,7 @@ export const fetchRegisterUser = async (dataUser: RegisterProps) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(dataUser),
+      credentials: "include",
     });
     const result = await res.json();
     return result;
@@ -36,18 +36,11 @@ export const fetchRegisterUser = async (dataUser: RegisterProps) => {
   }
 };
 
-export const fetchAllUsers = async (token: string | null) => {
+export const fetchAllUsers = async () => {
   try {
-    if (token === null) {
-      throw new Error("token is required");
-    }
-
     const data = await fetch("http://localhost:3001/users", {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     });
     const users: UserInfo = await data.json();
     return users;
