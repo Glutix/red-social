@@ -4,6 +4,7 @@ import { recoverToken } from "../utils/recoverToken";
 
 const checkSession = (req: Request, res: Response, next: NextFunction) => {
   const coockieToken = req.headers.cookie;
+  console.log(req.headers);
   if (!coockieToken) {
     return res
       .status(401)

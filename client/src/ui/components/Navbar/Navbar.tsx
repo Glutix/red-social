@@ -1,37 +1,49 @@
-import style from "../Navbar.module.css";
-import Image from "next/image";
+import style from "./Navbar.module.css";
+import SearchIcon from "@/icons/SearchIcon";
+import HomeIcon from "@/icons/HomeIcon";
+import NotificationIcon from "@/icons/NotificationIcon";
+import MenuIcon from "@/icons/MenuIcon";
+import ProfileIcon from "@/icons/ProfileIcon";
+import MessageIcon from "@/icons/MessageIcon";
+
 const Navbar = () => {
+  const menuItem = [
+    {
+      name: "Inicio",
+      icon: <HomeIcon className={style.icon} />,
+    },
+    {
+      name: "Buscar",
+      icon: <SearchIcon className={style.icon} />,
+    },
+    {
+      name: "Mensajes",
+      icon: <MessageIcon className={style.icon} />,
+    },
+    {
+      name: "Notificacion",
+      icon: <NotificationIcon className={style.icon} />,
+    },
+    {
+      name: "Perfil",
+      icon: <ProfileIcon className={style.icon} />,
+    },
+    {
+      name: "Mas",
+      icon: <MenuIcon className={style.icon} />,
+    },
+  ];
+
   return (
     <nav className={style.navbar}>
-      <section className={style.section}>
-        <Image src="/home.svg" alt="logo" width={30} height={30} />
-        <span>Inicio</span>
-      </section>
-
-      <section className={style.section}>
-        <Image src="/search.svg" alt="logo" width={30} height={30} />
-        <span>Buscar</span>
-      </section>
-
-      <section className={style.section}>
-        <Image src="/notification.svg" alt="logo" width={30} height={30} />
-        <span>Notificaciones</span>
-      </section>
-
-      <section className={style.section}>
-        <Image src="/message.svg" alt="logo" width={30} height={30} />
-        <span>Mensajes</span>
-      </section>
-
-      <section className={style.section}>
-        <Image src="/profile.svg" alt="logo" width={30} height={30} />
-        <span>Perfil</span>
-      </section>
-
-      <section className={style.section}>
-        <Image src="/menu.svg" alt="logo" width={30} height={30} />
-        <span>Mas</span>
-      </section>
+      {menuItem.map(({ name, icon }, index) => {
+        return (
+          <section className={style.section} key={index}>
+            {icon}
+            <span>{name}</span>
+          </section>
+        );
+      })}
     </nav>
   );
 };

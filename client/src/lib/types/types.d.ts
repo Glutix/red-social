@@ -28,3 +28,9 @@ export type UserLogin = {
   email: string;
   password: string;
 };
+
+export type IconProps = {
+  color?: string;
+  size?: string;
+  className?: string;
+};

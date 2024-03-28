@@ -40,6 +40,9 @@ export const fetchAllUsers = async () => {
   try {
     const data = await fetch("http://localhost:3001/users", {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
       credentials: "include",
     });
     const users: UserInfo = await data.json();

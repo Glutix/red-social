@@ -1,8 +1,9 @@
 "use client";
 import { ChangeEvent, FormEvent, useState } from "react";
 import style from "./Login.module.css";
-import { fetchLoginUser } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { fetchLoginUser } from "@/lib/api";
+import { aboreto } from "@/ui/fonts/fonts";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -57,7 +58,7 @@ const Login = () => {
           {errors.map((error: any, index) => {
             if (error.path?.includes("email")) {
               return (
-                <p key={index} className={style.error}>
+                <p key={index} className={style.errorEmail}>
                   ❌{error.message}
                 </p>
               );
@@ -79,7 +80,7 @@ const Login = () => {
           {errors?.map((error: any, index) => {
             if (error.path?.includes("password")) {
               return (
-                <p key={index} className={style.error}>
+                <p key={index} className={style.errorPassword}>
                   ❌{error.message}
                 </p>
               );
@@ -98,9 +99,10 @@ const Login = () => {
         </button>
       </form>
 
-      <div className={style.brand}>
-        <h1>Red Social</h1>
-        <p>Una red social para conectar con tus amigos y familiares</p>
+      <div className={`${style.brand} ${aboreto.className}`}>
+        <span>Gods</span>
+        <span>Gods</span>
+        <span>Gods</span>
       </div>
     </main>
   );
